@@ -15,6 +15,7 @@ func main() {
 	// kelvin := tempconv.Kelvin(300)
 	// celsius := tempconv.KToC(kelvin)
 	// fmt.Println(celsius) // 26.850000000000023°C
-	fmt.Println(popcount.PopCount(49))
+	fmt.Println(popcount.PopCountLoop(49))
+	popcount.Init()
 
 }

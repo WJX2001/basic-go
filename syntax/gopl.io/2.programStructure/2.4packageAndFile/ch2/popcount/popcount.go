@@ -2,13 +2,21 @@ package popcount
 
 var pc [256]byte
 
-func init() {
+func Init() {
 	for i := range pc {
+		// i/2 用于获取i的右移一位的值，i&1用于获取i的最低位
+		// pc[0] = 0  00000000
+		// pc[1] = 1  00000001
+		// pc[2] = 1  00000010
+		// pc[3] = 2  00000011
+		// pc[4] = 1  00000100 -> pc[2]+byte(4&1) 因为4的二进制表示是00000100 最低有效位位0，意味着没有额外的1要添加
 		pc[i] = pc[i/2] + byte(i&1)
 	}
+	// fmt.Println(pc[4])
 }
 
 func PopCount(x uint64) int {
+
 	return int(pc[byte(x>>(0*8))] +
 		pc[byte(x>>(1*8))] +
 		pc[byte(x>>(2*8))] +
@@ -21,6 +29,7 @@ func PopCount(x uint64) int {
 
 // 使用循环方式
 func PopCountLoop(x uint64) int {
+	Init()
 	sum := 0
 	for i := 0; i < 8; i++ {
 		sum += int(pc[byte(x>>(i*8))])
@@ -39,6 +48,13 @@ func PopCountShift(x uint64) int {
 		x >>= 1
 	}
 	return count
+}
+func PopCountEach8(x uint64) int {
+	var res int
+	for step := 7; step >= 0; step-- {
+		res += int(pc[byte(x>>(8*step))])
+	}
+	return res
 }
 
 // 表达式 x&(x-1) 会将x的最低的一个非零的bit位清零，使用这个PopCount函数
