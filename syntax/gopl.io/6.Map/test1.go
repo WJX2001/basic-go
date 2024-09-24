@@ -7,7 +7,8 @@ func main() {
 	// dedupFunc()
 	// charcount()
 	// fmt.Println(hasEdge("1", "2"))
-	wordfreq()
+	// wordfreq()
+	charcount2()
 }
 
 func test1() {
