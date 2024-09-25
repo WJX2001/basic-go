@@ -28,3 +28,47 @@ func DeferClosureV1() {
 	}(i)
 	i = 1
 }
+
+func DeferReturn() int {
+	a := 0
+
+	defer func() {
+		a = 1
+	}()
+	return a // 0
+}
+
+func DeferReturnV1() (a int) {
+	a = 0
+	defer func() {
+		a = 1
+	}()
+	return a // 1
+}
+
+// 自测题目
+
+func DeferClosureLoopV1() {
+	for i := 0; i < 10; i++ {
+		defer func() {
+			println(i) // 10 10 10 10 10 10 10 10 10 10
+		}()
+	}
+}
+
+func DeferClosureLoopV2() {
+	for i := 0; i < 10; i++ {
+		defer func(val int) {
+			println(val) // 0-9
+		}(i) // 9 8 7 6 5 4 3 2 1 0  // 因为defer是后进先出
+	}
+}
+
+func DeferClosureLoopV3() {
+	for i := 0; i < 10; i++ {
+		j := i
+		defer func() {
+			println(j) // 9 8 7 6 5 4 3 2 1 0
+		}()
+	}
+}
