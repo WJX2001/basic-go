@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 )
+import githubAPI "github.com/WJX2001/basic-go/syntax/gopl.io/8.JSON/github"
 
 func main() {
 	// MarshalingDemo()
@@ -15,7 +16,7 @@ func main() {
 }
 
 func githubSearchDemoTest() {
-	result, err := SearchIssues(os.Args[1:])
+	result, err := githubAPI.SearchIssues(os.Args[1:])
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -29,12 +30,12 @@ func githubSearchDemoTest() {
 
 func queryCount() {
 	query := os.Args[1:]
-	data, err := SearchIssues(query)
+	data, err := githubAPI.SearchIssues(query)
 
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	Process(data)
+	githubAPI.Process(data)
 }
