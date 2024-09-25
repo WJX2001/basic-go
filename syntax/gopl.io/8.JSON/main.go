@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strings"
 )
 
 func main() {
 	// MarshalingDemo()
 	// githubSearchDemoTest()
 	// queryCount()
-	queryComic()
+	// queryComic()
+	Xkcd1()
 }
 
 func githubSearchDemoTest() {
@@ -37,12 +37,4 @@ func queryCount() {
 	}
 
 	Process(data)
-}
-
-// 对漫画服务进行查询
-func queryComic() {
-	// 获取离线列表
-	// GetSaveInfo()
-	key := os.Args[1:]
-	ResLink(strings.Join(key, " "))
 }
