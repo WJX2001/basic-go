@@ -17,6 +17,7 @@ func main() {
 	flag.Parse()
 	fmt.Println(address)
 	// 开启服务
+	ListenAndServer(string(":" + address))
 }
 
 func ListenAndServer(address string) error {
